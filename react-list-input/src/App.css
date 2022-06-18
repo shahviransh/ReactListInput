@@ -1,0 +1,26 @@
+* {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 30px;
+}
+
+h6 {
+  word-spacing: 3em;
+}
+
+.list {
+  border-bottom: 2px solid black;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  white-space:pre;
+}
+
+.column {
+  float: center;
+  width: 33.33%;
+  padding: 0px;
+}

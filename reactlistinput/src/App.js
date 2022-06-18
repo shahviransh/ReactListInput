@@ -8,9 +8,9 @@ function App() {
   const [desc, setDesc] = useState("");
 
   const submitInput = () => {
-    if (input !== "") {
+    if (input !== "" && desc !== "") {
       const todo = {
-        id: todos.length + 1,
+        id: Date.now(),
         name: input,
         description: desc,
       };
@@ -18,26 +18,26 @@ function App() {
     }
   };
   const filterList = (id) => {
-    const todo = [...todos];
-    const filtered = todo.filter((item) => item.id !== id);
-    setTodos(filtered);
+    //const todo = [...todos];
+    //const filtered = todo.filter((item) => item.id !== id);
+    setTodos((todos) => todos.filter((item) => item.id !== id));
   };
 
   useEffect(() => {
-    if (todos.length < 3) {
-      const todo = {
+    const todo = [
+      {
         id: 1,
         name: "Viransh",
         description: "2nd year computer science student at McMaster University",
-      };
-      const tod = {
+      },
+      {
         id: 2,
         name: "Ujjwal",
         description: "2nd year computer science student at McMaster University",
-      };
-      setTodos([todo, tod]);
-    }
-  }, [todos.length]);
+      },
+    ];
+    setTodos(todo);
+  }, []);
 
   return (
     <div>
@@ -54,32 +54,32 @@ function App() {
         value={desc}
         onInput={(e) => setDesc(e.target.value)}
       />
-      <button onClick={submitInput}>Add</button>
+      <button onClick={submitInput} className="btn btn-primary">
+        Add
+      </button>
       <dl>
         <div class="row">
           <div class="column">Name</div>
           <div class="column">Description</div>
           <div class="column">Delete</div>
         </div>
-        {todos.map((item) => {
-          return (
-            <dd key={item.id}>
-              <div class="row list">
-                <div class="column">{item.name}</div>
-                <div class="column">{item.description}</div>
-                <div class="column">
-                  <button
-                    onClick={() => {
-                      filterList(item.id);
-                    }}
-                  >
-                    ×
-                  </button>
-                </div>
+        {todos.map((item) => (
+          <dd key={item.id}>
+            <div class="row list">
+              <div class="column">{item.name}</div>
+              <div class="column">{item.description}</div>
+              <div class="column">
+                <button
+                  onClick={() => {
+                    filterList(item.id);
+                  }}
+                >
+                  ×
+                </button>
               </div>
-            </dd>
-          );
-        })}
+            </div>
+          </dd>
+        ))}
       </dl>
     </div>
   );
